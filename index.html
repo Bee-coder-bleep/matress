@@ -1,79 +1,620 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Pacific Mattress</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mattresses - Modern Pacific Mattress</title>
+  <link rel="icon" type="image/webp" href="favicon.webp">
+  <style>
+    :root {
+      --brand-orange: #3cb74b;
+      --brand-dark: #2e9640;
+      --btn-red: #1a1a1a;
+      --btn-red-hover: #3cb74b;
+      --whatsapp: #25d366;
+      --whatsapp-top: #e3f7e6;
+      --text: #1a1a1a;
+      --text-secondary: #666;
+      --bg: #ffffff;
+      --bg-light: #f8f8f8;
+      --border: #e0e0e0;
+      --footer-bg: #f5f5f5;
+    }
+    /* Note: --brand-orange / --btn-red variable names kept as-is so the rest of
+       the stylesheet below doesn't need touching — their values now hold the
+       Modern Pacific Mattress green + charcoal palette. */
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, Helvetica, sans-serif;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        body{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-            background:linear-gradient(135deg,#0f172a,#1e3a8a);
-            color:#fff;
-            text-align:center;
-        }
+    a { text-decoration: none; color: inherit; }
 
-        .container{
-            background:rgba(255,255,255,0.08);
-            padding:50px;
-            border-radius:15px;
-            backdrop-filter:blur(8px);
-            box-shadow:0 10px 25px rgba(0,0,0,.3);
-            max-width:600px;
-            width:90%;
-        }
+    /* Top Bar */
+    .top-bar {
+      background: var(--whatsapp-top);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .top-bar a { display: flex; align-items: center; gap: 6px; color: #00695c; }
+    .top-bar svg { width: 16px; height: 16px; }
 
-        h1{
-            font-size:3rem;
-            margin-bottom:15px;
-        }
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+    .site-logo {
+      height: 60px;
+      width: auto;
+      display: block;
+    }
+    .logo {
+      text-align: center;
+      line-height: 1.1;
+    }
+    .logo-tagline {
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--brand-orange);
+      font-weight: 700;
+    }
+    .logo-main {
+      font-size: 19px;
+      font-weight: 900;
+      color: var(--brand-orange);
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+    }
+    .logo-main span { font-weight: 400; color: var(--text-secondary); }
+    .header-actions {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .header-actions svg {
+      width: 24px; height: 24px;
+      stroke: var(--text);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
 
-        p{
-            font-size:1.2rem;
-            color:#e5e7eb;
-            margin-bottom:30px;
-            line-height:1.6;
-        }
+    /* Promo Banner */
+    .promo-banner {
+      background: linear-gradient(90deg, #ff9800, #f57c00);
+      color: white;
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .promo-banner .emoji { font-size: 16px; }
 
-        .btn{
-            display:inline-block;
-            padding:14px 30px;
-            background:#22c55e;
-            color:#fff;
-            text-decoration:none;
-            border-radius:30px;
-            font-size:1rem;
-            font-weight:bold;
-            transition:.3s;
-        }
+    /* Page Header */
+    .page-header { padding: 24px 16px 16px; }
+    .page-header h1 {
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .page-header p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .page-header p strong { color: var(--text); }
 
-        .btn:hover{
-            background:#16a34a;
-            transform:translateY(-3px);
-        }
-    </style>
+    /* Best-Selling type pills */
+    .type-pills-section { padding: 16px; text-align: center; }
+    .type-pills-section h2 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .type-pills-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      justify-content: flex-start;
+    }
+    .type-pill {
+      flex: 0 0 auto;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1.5px solid var(--brand-dark);
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--brand-dark);
+      background: var(--bg);
+      white-space: nowrap;
+    }
+    .type-pill.active {
+      background: var(--brand-dark);
+      color: #fff;
+    }
+
+    /* Sort Bar */
+    .sort-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sort-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .sort-select {
+      appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 600;
+      padding-right: 20px;
+      color: var(--text);
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23666' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
+
+    /* Product List */
+    .product-list { padding: 8px 16px 32px; }
+    .product-card {
+      margin-bottom: 24px;
+      animation: fadeIn 0.4s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Size Diagram */
+    .size-diagram {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 8px;
+      padding-right: 8px;
+    }
+    .size-box {
+      position: relative;
+      border: 2px solid var(--brand-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      background: rgba(245, 166, 35, 0.05);
+    }
+    .size-box .dim-top {
+      position: absolute;
+      top: -18px;
+      font-size: 9px;
+      color: var(--brand-orange);
+      font-weight: 600;
+    }
+    .size-box .dim-side {
+      position: absolute;
+      right: -28px;
+      font-size: 9px;
+      color: var(--brand-orange);
+      font-weight: 600;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+
+    /* Product Image */
+    .product-image-wrap {
+      background: var(--bg-light);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      width: 100%;
+    }
+    .mattress-visual {
+      width: 100%;
+      max-width: 320px;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.12));
+    }
+    .product-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Product Info */
+    .product-info h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      margin-bottom: 4px;
+    }
+    .product-price {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--brand-orange);
+      margin-bottom: 12px;
+    }
+    .btn-buy {
+      display: inline-block;
+      background: var(--btn-red);
+      color: white;
+      padding: 12px 32px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: capitalize;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(255,87,34,0.3);
+    }
+
+    /* Chat FAB */
+    .chat-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 16px;
+      width: 56px;
+      height: 56px;
+      background: var(--brand-orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(245,166,35,0.4);
+      z-index: 99;
+      border: 3px solid white;
+    }
+    .chat-fab svg { width: 28px; height: 28px; fill: white; }
+
+    /* Call FAB */
+    .call-fab {
+      position: fixed;
+      bottom: 96px;
+      right: 16px;
+      width: 56px;
+      height: 56px;
+      background: var(--btn-red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      z-index: 99;
+      border: 3px solid white;
+    }
+    .call-fab svg { width: 26px; height: 26px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    /* Cart FAB (overrides the injected .cart-icon-btn base styles via higher specificity) */
+    .cart-fab.cart-icon-btn {
+      position: fixed;
+      bottom: 168px;
+      right: 16px;
+      width: 56px;
+      height: 56px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      z-index: 99;
+      border: 3px solid var(--brand-orange);
+      padding: 0;
+      cursor: pointer;
+    }
+    .cart-fab svg { width: 24px; height: 24px; stroke: var(--text); fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    /* Footer */
+    .footer {
+      background: var(--footer-bg);
+      padding: 40px 16px 24px;
+      margin-top: 16px;
+    }
+    .footer-logo {
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+    .footer-logo .ko { color: var(--text-secondary); font-weight: 400; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 16px;
+      margin-bottom: 32px;
+    }
+    .footer-col h4 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .footer-col a { color: var(--text-secondary); }
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .footer-contact svg {
+      width: 14px; height: 14px;
+      margin-top: 3px;
+      flex-shrink: 0;
+      fill: var(--text-secondary);
+    }
+
+    .subscribe {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .subscribe-icon {
+      width: 32px; height: 32px;
+      margin: 0 auto 8px;
+      stroke: var(--brand-orange);
+      fill: none;
+      stroke-width: 2;
+    }
+    .subscribe h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .subscribe p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    .btn-subscribe {
+      width: 100%;
+      background: var(--btn-red);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Desktop tweaks */
+    @media (min-width: 768px) {
+      .product-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      .footer-grid { grid-template-columns: repeat(4, 1fr); }
+      .page-header, .sort-bar { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+      .product-list { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Welcome to Modern Pacific Mattress</h1>
-    <p>
-        Experience premium comfort with high-quality mattresses designed
-        for better sleep, lasting durability, and exceptional value.
-    </p>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <a href="https://wa.me/254785274399" target="_blank">
+      <svg viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp 0785 274399
+    </a>
+    <a href="tel:0785274399">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Call 0785 274399
+    </a>
+  </div>
 
-    <a href="#" class="btn">Explore Our Products</a>
-</div>
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" aria-label="Modern Pacific Mattress home">
+      <img src="logo.webp" alt="Modern Pacific Mattress" class="site-logo">
+    </a>
+    <div class="logo">
+      <div class="logo-tagline">Comfort Built For Kenyan Homes</div>
+      <div class="logo-main"><span style="color:var(--brand-orange)">Modern Pacific</span> <span style="color:var(--text-secondary)">Mattress</span></div>
+    </div>
+    <div class="header-actions">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <button class="cart-icon-btn" aria-label="Open cart">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge">0</span>
+      </button>
+    </div>
+  </header>
 
+  <!-- Promo Banner -->
+  <div class="promo-banner">
+    <span class="emoji">🎉</span>
+    <span>PAY SAFE, PAY EASY — WE ACCEPT M-PESA <!-- TODO: add your Paybill/Till number here --></span>
+  </div>
+
+  <!-- Best-Selling Products / Mattress Types -->
+  <div class="type-pills-section">
+    <h2>Best-Selling Products</h2>
+    <div class="type-pills-row">
+      <a href="product-detail.html?product=pocket-spring" class="type-pill active">Pocket Spring</a>
+      <a href="product-detail.html?product=orthopedic-high-density" class="type-pill">Orthopedic</a>
+      <a href="product-detail.html?product=memory-foam" class="type-pill">Memory Foam</a>
+      <a href="product-detail.html?product=hybrid" class="type-pill">Hybrid</a>
+    </div>
+  </div>
+
+  <!-- Page Content -->
+  <div class="page-header">
+    <h1>Mattresses</h1>
+    <p>Every Modern Pacific mattress is <strong>built firm and built to last</strong>. High-density foam, a breathable quilted cover, and a 10-year warranty on every size — so a good night's sleep is never in question. Choose your size below and order straight to your door, anywhere in Kenya.</p>
+  </div>
+
+  <div class="sort-bar">
+    <span class="sort-label">Sort</span>
+    <select class="sort-select">
+      <option>Best selling</option>
+      <option>Price: Low to High</option>
+      <option>Price: High to Low</option>
+      <option>Alphabetically</option>
+    </select>
+  </div>
+
+  <!-- Products -->
+  <div class="product-list" id="productList"></div>
+
+  <!-- Chat FAB -->
+  <a href="https://wa.me/254785274399" class="chat-fab" target="_blank" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.8 11.8 0 0012 0 11.93 11.93 0 00.1 11.79a11.77 11.77 0 001.58 5.92L0 24l6.58-1.73a11.9 11.9 0 005.4 1.3c6.56 0 11.9-5.34 11.9-11.9a11.8 11.8 0 00-3.36-8.19zM12 21.5a9.55 9.55 0 01-4.87-1.34l-.35-.21-3.62.95.97-3.53-.23-.36A9.46 9.46 0 012.55 12c0-5.22 4.25-9.47 9.47-9.47 2.53 0 4.9.98 6.69 2.77a9.4 9.4 0 012.76 6.7c0 5.22-4.25 9.47-9.47 9.47zm5.23-7.15c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.14-.64.15-.18.28-.72.93-.88 1.12-.16.19-.32.22-.6.07-.27-.14-1.15-.45-2.19-1.43-.81-.73-1.36-1.63-1.51-1.9-.16-.27-.02-.41.12-.56.12-.13.27-.34.4-.5.14-.17.18-.28.27-.47.1-.19.05-.35-.02-.49-.08-.14-.57-1.37-.78-1.87-.2-.5-.41-.43-.56-.44-.14 0-.3-.01-.46-.01-.16 0-.42.06-.64.3-.22.24-.84.83-.84 2.03 0 1.2.87 2.36 1 2.52.12.16 1.73 2.64 4.18 3.7.58.25 1.04.4 1.39.51.58.19 1.11.16 1.54.1.47-.07 1.44-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.07-.1-.25-.17-.52-.29z"/></svg>
+  </a>
+
+  <!-- Call FAB -->
+  <a href="tel:0785274399" class="call-fab" aria-label="Call us">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+  </a>
+
+  <!-- Cart FAB -->
+  <button class="cart-fab cart-icon-btn" aria-label="Open cart">
+    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+    <span class="cart-badge">0</span>
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">Modern Pacific<span class="ko"> Mattress</span></div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Our Products</h4>
+        <ul>
+          <li><a href="#">Sofas</a></li>
+          <li><a href="#">Mattresses</a></li>
+          <li><a href="#">Tables</a></li>
+          <li><a href="#">TV Stands</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Carpets</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Buyers Guides</h4>
+        <ul>
+          <li><a href="#">Product Reviews</a></li>
+          <li><a href="#">Mattress Buying Guide</a></li>
+          <li><a href="#">Sofas Buying Guide</a></li>
+          <li><a href="#">Pay Later, Lipia Pole Pole</a></li>
+          <li><a href="#">Countrywide Delivery</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">All Guides</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Talk To Us</h4>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> 0785 274399</li>
+          <li><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> 0748 486829</li>
+          <li><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg> sales@modernpacificmattresses.com</li>
+          <li><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg> Facebook</li>
+          <li><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg> Instagram</li>
+          <li><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.33 29 29 0 00-.46-5.33zM9.75 15.02V8.48l5.75 3.27-5.75 3.27z"/></svg> YouTube</li>
+          <li><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Join The Dream Team</h4>
+        <ul>
+          <li><a href="#">Leadership team</a></li>
+          <li><a href="#">Job openings</a></li>
+          <li><a href="#">Leadership reflections</a></li>
+        </ul>
+        <h4 style="margin-top:20px">Find Us</h4>
+        <ul>
+          <!-- TODO: replace with Modern Pacific Mattress's real showroom address(es) -->
+          <li>Showroom address goes here</li>
+          <li><a href="#">View All Locations</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subscribe">
+      <svg class="subscribe-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+      <h3>Subscribe to our emails</h3>
+      <p>Caution! One email from us could have you smiling all week</p>
+      <button class="btn-subscribe">Subscribe</button>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      { name: '5 by 6 Pacific Mattress', price: 'KSh12,899.00', size: '5*6', w: 60, h: 74, slug: '5-by-6', img: '1.webp' },
+      { name: '4 by 6 Pacific Mattress', price: 'KSh10,999.00', size: '4*6', w: 48, h: 74, slug: '4-by-6', img: '2.webp' },
+      { name: '3.5 by 6 Pacific Mattress', price: 'KSh9,699.00', size: '3.5*6', w: 42, h: 74, slug: '3.5-by-6', img: '3.webp' },
+      { name: '6 by 6 Pacific Mattress', price: 'KSh15,299.00', size: '6*6', w: 72, h: 74, slug: '6-by-6', img: '4.webp' },
+      { name: '3 by 6 Pacific Mattress', price: 'KSh8,199.00', size: '3*6', w: 36, h: 74, slug: '3-by-6', img: '5.webp' },
+      { name: '4.5 by 6 Pacific Mattress', price: 'KSh11,799.00', size: '4.5*6', w: 54, h: 74, slug: '4.5-by-6', img: '6.webp' },
+    ];
+
+    const list = document.getElementById('productList');
+    products.forEach((p, i) => {
+      const boxW = Math.max(48, p.w * 1.1);
+      const boxH = Math.max(40, p.h * 0.7);
+      list.innerHTML += `
+        <div class="product-card" style="animation-delay:${i*0.05}s">
+          <div class="size-diagram">
+            <div class="size-box" style="width:${boxW}px;height:${boxH}px;">
+              <span class="dim-top">${p.w} inches</span>
+              <span class="dim-side">${p.h} inches</span>
+              ${p.size}
+            </div>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-photo" src="${p.img}" alt="${p.name}">
+          </div>
+          <div class="product-info">
+            <h3>${p.name}</h3>
+            <div class="product-price">${p.price}</div>
+            <a href="product-detail.html?product=${p.slug}" class="btn-buy">Buy Now</a>
+          </div>
+        </div>
+      `;
+    });
+  </script>
+  <script src="cart.js"></script>
 </body>
 </html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mattress Detail - Modern Pacific Mattress</title>
+  <link rel="icon" type="image/webp" href="favicon.webp">
+  <style>
+    :root {
+      --brand-orange: #3cb74b;
+      --brand-dark: #2e9640;
+      --btn-red: #1a1a1a;
+      --btn-red-hover: #3cb74b;
+      --whatsapp: #25d366;
+      --whatsapp-top: #e3f7e6;
+      --text: #1a1a1a;
+      --text-secondary: #666;
+      --bg: #ffffff;
+      --bg-light: #f8f8f8;
+      --border: #e0e0e0;
+      --footer-bg: #f5f5f5;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Top Bar */
+    .top-bar {
+      background: var(--whatsapp-top);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .top-bar a { display: flex; align-items: center; gap: 6px; color: #00695c; }
+    .top-bar svg { width: 16px; height: 16px; }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+    .site-logo { height: 60px; width: auto; display: block; }
+    .logo { text-align: center; line-height: 1.1; }
+    .logo-tagline {
+      font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--brand-orange); font-weight: 700;
+    }
+    .logo-main { font-size: 19px; font-weight: 900; letter-spacing: -0.5px; white-space: nowrap; }
+    .header-actions { display: flex; align-items: center; gap: 16px; }
+    .header-actions svg { width: 24px; height: 24px; stroke: var(--text); fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 14px 16px 0;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+    .breadcrumb a:hover { color: var(--brand-orange); }
+
+    /* Gallery */
+    .pd-wrap { padding: 12px 16px 8px; }
+    .gallery-main {
+      background: var(--bg-light);
+      border-radius: 12px;
+      display: flex; justify-content: center; align-items: center;
+      margin-bottom: 10px;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .gallery-main svg { width: 100%; max-width: 320px; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.12)); }
+    .gallery-main img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .gallery-thumbs { display: flex; gap: 8px; }
+    .gallery-thumbs button {
+      width: 56px; height: 56px; border-radius: 8px; border: 2px solid transparent;
+      background: var(--bg-light); padding: 0; flex: none; overflow: hidden;
+    }
+    .gallery-thumbs button.active { border-color: var(--brand-orange); }
+    .gallery-thumbs svg, .gallery-thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Product Info */
+    .pd-info { padding: 12px 16px 0; }
+    .pd-info h1 { font-size: 24px; font-weight: 900; margin-bottom: 6px; letter-spacing: -0.5px; }
+    .pd-price { font-size: 21px; font-weight: 700; color: var(--brand-orange); margin-bottom: 6px; }
+    .stock-line {
+      font-size: 12.5px; color: var(--text-secondary); font-weight: 600;
+      display: flex; align-items: center; gap: 6px; margin-bottom: 18px;
+    }
+    .stock-line::before { content:""; width: 7px; height: 7px; border-radius: 50%; background: var(--brand-orange); }
+
+    .opt-label {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;
+      font-weight: 700; color: var(--text); margin-bottom: 8px;
+    }
+    .pill-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .pill-row button {
+      border: 1.5px solid var(--border); background: #fff; padding: 8px 16px;
+      border-radius: 999px; font-size: 13.5px; font-weight: 600; color: var(--text);
+    }
+    .pill-row button.active { border-color: var(--btn-red); background: var(--btn-red); color: #fff; }
+
+    .qty-buy-row { display: flex; gap: 10px; margin-bottom: 20px; }
+    .qty-control { display: flex; align-items: center; border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .qty-control button { background: var(--bg-light); border: none; width: 36px; height: 44px; font-size: 18px; color: var(--text); }
+    .qty-control span { width: 34px; text-align: center; font-weight: 700; }
+    .btn-buy-pd {
+      flex: 1; background: var(--btn-red); color: #fff; border: none; border-radius: 6px;
+      font-size: 14.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-buy-pd:hover { background: var(--btn-red-hover); }
+    .size-dropdown {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 16px;
+      background: var(--bg-light);
+    }
+    .size-dropdown select {
+      width: 100%;
+      padding: 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--bg);
+      margin-bottom: 12px;
+      appearance: none;
+    }
+    .size-dropdown .selected-price {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--brand-orange);
+    }
+    .btn-add-cart {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      padding: 13px;
+      border-radius: 8px;
+      font-size: 14.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .btn-add-cart svg { stroke: var(--text); fill: none; stroke-width: 2; }
+    .btn-add-cart:hover { background: var(--bg-light); }
+
+    .perks-row { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+    .perk { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 600; }
+    .perk svg { width: 19px; height: 19px; stroke: var(--brand-orange); fill: none; stroke-width: 1.8; flex: none; }
+
+    .referral-banner {
+      background: var(--bg-light); border-radius: 10px; padding: 12px 14px;
+      font-size: 13px; display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
+    }
+    .referral-banner svg { width: 22px; height: 22px; stroke: var(--brand-orange); fill: none; stroke-width: 1.8; flex: none; }
+
+    /* Tabs */
+    .tab-headers { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+    .tab-headers button {
+      background: none; border: none; padding: 10px 16px; font-size: 13.5px; font-weight: 700;
+      color: var(--text-secondary); border-bottom: 2px solid transparent; margin-bottom: -1px;
+    }
+    .tab-headers button.active { color: var(--text); border-color: var(--brand-orange); }
+    .tab-panel { display: none; font-size: 14px; line-height: 1.7; color: #444; padding-bottom: 24px; }
+    .tab-panel.active { display: block; }
+    .tab-panel ul { padding-left: 18px; }
+    .tab-panel li { margin-bottom: 6px; }
+
+    .guarantee-card { background: var(--bg-light); border-radius: 10px; padding: 14px; margin-bottom: 10px; }
+    .guarantee-card h5 { font-size: 14.5px; margin-bottom: 4px; }
+    .guarantee-card p { font-size: 13px; color: var(--text-secondary); }
+
+    /* Related */
+    .related { padding: 8px 16px 32px; }
+    .related h2 { font-size: 20px; font-weight: 900; margin-bottom: 14px; }
+    .related-grid { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 6px; }
+    .related-card {
+      flex: 0 0 150px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    }
+    .related-card .thumb { background: var(--bg-light); aspect-ratio: 4 / 3; overflow: hidden; }
+    .related-card .thumb svg { width: 100%; padding: 10px; box-sizing: border-box; }
+    .related-card .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .related-card .info { padding: 10px; }
+    .related-card h4 { font-size: 12.5px; font-weight: 700; margin-bottom: 4px; }
+    .related-card .price { font-size: 13px; font-weight: 700; color: var(--brand-orange); }
+
+    /* Chat FAB */
+    .chat-fab {
+      position: fixed; bottom: 24px; right: 16px; width: 56px; height: 56px;
+      background: var(--brand-orange); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(60,183,75,0.4); z-index: 99; border: 3px solid white;
+    }
+    .chat-fab svg { width: 28px; height: 28px; fill: white; }
+
+    /* Call FAB */
+    .call-fab {
+      position: fixed; bottom: 96px; right: 16px; width: 56px; height: 56px;
+      background: var(--btn-red); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 99; border: 3px solid white;
+    }
+    .call-fab svg { width: 26px; height: 26px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    /* Cart FAB (overrides the injected .cart-icon-btn base styles via higher specificity) */
+    .cart-fab.cart-icon-btn {
+      position: fixed; bottom: 168px; right: 16px; width: 56px; height: 56px;
+      background: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2); z-index: 99; border: 3px solid var(--brand-orange);
+      padding: 0; cursor: pointer;
+    }
+    .cart-fab svg { width: 24px; height: 24px; stroke: var(--text); fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    /* Footer (shared) */
+    .footer { background: var(--footer-bg); padding: 40px 16px 24px; margin-top: 16px; }
+    .footer-logo { font-size: 26px; font-weight: 900; margin-bottom: 24px; letter-spacing: -0.5px; }
+    .footer-logo .ko { color: var(--text-secondary); font-weight: 400; }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 16px; margin-bottom: 32px; }
+    .footer-col h4 { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.4; }
+    .footer-col a { color: var(--text-secondary); }
+    .footer-contact li { display: flex; align-items: flex-start; gap: 8px; }
+    .footer-contact svg { width: 14px; height: 14px; margin-top: 3px; flex-shrink: 0; fill: var(--text-secondary); }
+    .subscribe { text-align: center; padding-top: 24px; border-top: 1px solid var(--border); }
+    .subscribe-icon { width: 32px; height: 32px; margin: 0 auto 8px; stroke: var(--brand-orange); fill: none; stroke-width: 2; }
+    .subscribe h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .subscribe p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+    .btn-subscribe { width: 100%; background: var(--btn-red); color: white; border: none; padding: 14px; border-radius: 6px; font-size: 15px; font-weight: 700; cursor: pointer; }
+    .btn-subscribe:hover { background: var(--btn-red-hover); }
+
+
+    /* Desktop */
+    @media (min-width: 768px) {
+      .pd-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+      .pd-wrap, .pd-info { padding-left: 0; padding-right: 0; }
+      .breadcrumb { max-width: 1100px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+      .related { max-width: 1100px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+      .related-grid { overflow-x: visible; display: grid; grid-template-columns: repeat(4,1fr); }
+      .footer-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <a href="https://wa.me/254785274399" target="_blank">
+      <svg viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp 0785 274399
+    </a>
+    <a href="tel:0785274399">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Call 0785 274399
+    </a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" aria-label="Modern Pacific Mattress home">
+      <img src="logo.webp" alt="Modern Pacific Mattress" class="site-logo">
+    </a>
+    <div class="logo">
+      <div class="logo-tagline">Comfort Built For Kenyan Homes</div>
+      <div class="logo-main"><span style="color:var(--brand-orange)">Modern Pacific</span> <span style="color:var(--text-secondary)">Mattress</span></div>
+    </div>
+    <div class="header-actions">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <button class="cart-icon-btn" aria-label="Open cart">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="index.html">Mattresses</a> / <span id="crumbName">Mattress</span>
+  </div>
+
+  <div class="pd-layout">
+    <div>
+      <div class="pd-wrap">
+        <div class="gallery-main" id="mainImage"></div>
+        <div class="gallery-thumbs" id="thumbRow"></div>
+      </div>
+    </div>
+
+    <div class="pd-info">
+      <h1 id="pdName">Product name</h1>
+      <div class="pd-price" id="pdPrice">KSh 0.00</div>
+      <div class="stock-line">In stock — ships within 48 hours</div>
+
+      <div class="opt-label">Mattress Thickness</div>
+      <div class="pill-row">
+        <button class="active">8 inch</button>
+        <button>10 inch</button>
+        <button>12 inch</button>
+      </div>
+
+      <div class="size-dropdown" id="sizeDropdown">
+        <div class="opt-label">Select Size</div>
+        <select id="sizeSelect"></select>
+        <div class="selected-price" id="selectedPrice"></div>
+      </div>
+
+      <div class="qty-buy-row">
+        <div class="qty-control">
+          <button class="qty-minus" aria-label="Decrease quantity">−</button>
+          <span>1</span>
+          <button class="qty-plus" aria-label="Increase quantity">+</button>
+        </div>
+        <button class="btn-buy-pd" id="buyBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>
+          Buy Now
+        </button>
+      </div>
+
+      <button class="btn-add-cart" id="addCartBtn">
+        <svg width="17" height="17" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        Add to Cart
+      </button>
+
+      <div class="perks-row">
+        <span class="perk"><svg viewBox="0 0 24 24"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4z"/><path d="m9 12 2 2 4-4"/></svg> 10-year warranty</span>
+        <span class="perk"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 45-day sleep trial</span>
+        <span class="perk"><svg viewBox="0 0 24 24"><rect x="1" y="6" width="15" height="11" rx="2"/><path d="M16 10h4l3 3v4h-7z"/><circle cx="6" cy="19" r="1.8"/><circle cx="17.5" cy="19" r="1.8"/></svg> Countrywide delivery</span>
+      </div>
+
+      <div class="referral-banner">
+        <svg viewBox="0 0 24 24"><path d="M20 8v6M23 11h-6"/><path d="M14 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="7.5" cy="7" r="4"/></svg>
+        <span>Refer a friend to buy and you'll both get a free pillow.</span>
+      </div>
+
+      <div class="tab-headers">
+        <button class="active" data-tab="tab-desc">Description</button>
+        <button data-tab="tab-features">Features</button>
+        <button data-tab="tab-guarantee">Guarantee</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-desc">
+        <p id="pdDescription">Built for ultimate comfort at a fair price. High-density foam gives it a firm, supportive feel, while the quilted cover keeps it breathable through warm nights.</p>
+      </div>
+
+      <div class="tab-panel" id="tab-features">
+        <ul>
+          <li><strong>Looks sharp</strong> — a patterned cover finished with reinforced edge tape.</li>
+          <li><strong>Three comfort layers</strong> — engineered for even weight distribution and lasting support.</li>
+          <li><strong>Built to last</strong> — dense foam core that holds its shape, night after night.</li>
+          <li><strong>Motion isolation</strong> — a supportive core that keeps a partner's movement from waking you.</li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" id="tab-guarantee">
+        <div class="guarantee-card">
+          <h5>10-year warranty</h5>
+          <p>If your Modern Pacific mattress starts to sag under normal use within 10 years, we'll replace it — free of charge.</p>
+        </div>
+        <div class="guarantee-card">
+          <h5>45-day sleep trial</h5>
+          <p>Order today, sleep on it tomorrow. Not the right fit? Return it within 45 days for a full refund.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="related">
+    <h2>You may also like</h2>
+    <div class="related-grid" id="relatedGrid"></div>
+  </div>
+
+  <!-- Chat FAB -->
+  <a href="https://wa.me/254785274399" class="chat-fab" target="_blank" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.8 11.8 0 0012 0 11.93 11.93 0 00.1 11.79a11.77 11.77 0 001.58 5.92L0 24l6.58-1.73a11.9 11.9 0 005.4 1.3c6.56 0 11.9-5.34 11.9-11.9a11.8 11.8 0 00-3.36-8.19zM12 21.5a9.55 9.55 0 01-4.87-1.34l-.35-.21-3.62.95.97-3.53-.23-.36A9.46 9.46 0 012.55 12c0-5.22 4.25-9.47 9.47-9.47 2.53 0 4.9.98 6.69 2.77a9.4 9.4 0 012.76 6.7c0 5.22-4.25 9.47-9.47 9.47zm5.23-7.15c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.14-.64.15-.18.28-.72.93-.88 1.12-.16.19-.32.22-.6.07-.27-.14-1.15-.45-2.19-1.43-.81-.73-1.36-1.63-1.51-1.9-.16-.27-.02-.41.12-.56.12-.13.27-.34.4-.5.14-.17.18-.28.27-.47.1-.19.05-.35-.02-.49-.08-.14-.57-1.37-.78-1.87-.2-.5-.41-.43-.56-.44-.14 0-.3-.01-.46-.01-.16 0-.42.06-.64.3-.22.24-.84.83-.84 2.03 0 1.2.87 2.36 1 2.52.12.16 1.73 2.64 4.18 3.7.58.25 1.04.4 1.39.51.58.19 1.11.16 1.54.1.47-.07 1.44-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.07-.1-.25-.17-.52-.29z"/></svg>
+  </a>
+
+  <!-- Call FAB -->
+  <a href="tel:0785274399" class="call-fab" aria-label="Call us">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+  </a>
+
+  <!-- Cart FAB -->
+  <button class="cart-fab cart-icon-btn" aria-label="Open cart">
+    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+    <span class="cart-badge">0</span>
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">Modern Pacific<span class="ko"> Mattress</span></div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Our Products</h4>
+        <ul>
+          <li><a href="#">Sofas</a></li>
+          <li><a href="index.html">Mattresses</a></li>
+          <li><a href="#">Tables</a></li>
+          <li><a href="#">TV Stands</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Carpets</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Buyers Guides</h4>
+        <ul>
+          <li><a href="#">Product Reviews</a></li>
+          <li><a href="#">Mattress Buying Guide</a></li>
+          <li><a href="#">Sofas Buying Guide</a></li>
+          <li><a href="#">Pay Later, Lipia Pole Pole</a></li>
+          <li><a href="#">Countrywide Delivery</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">All Guides</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Talk To Us</h4>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> 0785 274399</li>
+          <li><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> 0748 486829</li>
+          <li><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg> sales@modernpacificmattresses.com</li>
+          <li><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg> Facebook</li>
+          <li><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg> Instagram</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Join The Dream Team</h4>
+        <ul>
+          <li><a href="#">Leadership team</a></li>
+          <li><a href="#">Job openings</a></li>
+          <li><a href="#">Leadership reflections</a></li>
+        </ul>
+        <h4 style="margin-top:20px">Find Us</h4>
+        <ul>
+          <!-- TODO: replace with Modern Pacific Mattress's real showroom address(es) -->
+          <li>Showroom address goes here</li>
+          <li><a href="#">View All Locations</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subscribe">
+      <svg class="subscribe-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+      <h3>Subscribe to our emails</h3>
+      <p>Occasional emails about new arrivals and restocks. No spam, ever.</p>
+      <button class="btn-subscribe">Subscribe</button>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      { name: '5 by 6 Pacific Mattress', price: 'KSh12,899.00', size: '5*6', slug: '5-by-6', img: '1.webp',
+        desc: "The Queen-size 5x6 Modern Pacific mattress is built for ultimate comfort at a fair price. High-density foam gives it a firm, supportive feel, while the quilted cover keeps it breathable through warm nights." },
+      { name: '4 by 6 Pacific Mattress', price: 'KSh10,999.00', size: '4*6', slug: '4-by-6', img: '2.webp',
+        desc: "The 4x6 Modern Pacific mattress brings the same firm, supportive comfort in a space-saving size — ideal for smaller bedrooms without compromising on quality." },
+      { name: '3.5 by 6 Pacific Mattress', price: 'KSh9,699.00', size: '3.5*6', slug: '3.5-by-6', img: '3.webp',
+        desc: "A compact 3.5x6 mattress with full-size comfort. High-density foam and a breathable quilted cover make it a firm favourite for single rooms and guest spaces." },
+      { name: '6 by 6 Pacific Mattress', price: 'KSh15,299.00', size: '6*6', slug: '6-by-6', img: '4.webp',
+        desc: "Our largest size — the 6x6 Modern Pacific mattress gives couples all the room they need, with the same firm, durable foam core and quilted cover." },
+      { name: '3 by 6 Pacific Mattress', price: 'KSh8,199.00', size: '3*6', slug: '3-by-6', img: '5.webp',
+        desc: "A single 3x6 mattress built firm and built to last, with a quilted cover that stays breathable through the night. Great for kids' rooms and single beds." },
+      { name: '4.5 by 6 Pacific Mattress', price: 'KSh11,799.00', size: '4.5*6', slug: '4.5-by-6', img: '6.webp',
+        desc: "The 4.5x6 Modern Pacific mattress strikes a balance between space and comfort, with the same high-density foam and 10-year warranty as the rest of the range." },
+      { name: 'Pocket Spring Mattress', price: 'From KSh 15,000', size: '', slug: 'pocket-spring', img: '7.webp',
+        desc: "Individually wrapped coils move independently, so each spring responds to your body on its own. That means less motion transfer between sleeping partners and targeted support exactly where you need it. Available in Single, Double, Queen, and King." },
+      { name: 'Orthopedic High-Density Mattress', price: 'From KSh 15,000', size: '', slug: 'orthopedic-high-density', img: '8.webp',
+        desc: "Built with dense, supportive foam for a firmer feel that keeps your spine aligned through the night — a good pick if back health is a priority. Available in Single, Double, Queen, and King." },
+      { name: 'Memory Foam Mattress', price: 'From KSh 15,000', size: '', slug: 'memory-foam', img: '9.webp',
+        desc: "Contours closely to your body to relieve pressure at the shoulders, hips, and back, then slowly returns to shape as you move. A softer, hugging feel for side and back sleepers. Available in Single, Double, Queen, and King." },
+      { name: 'Hybrid Mattress', price: 'From KSh 15,000', size: '', slug: 'hybrid', img: '10.webp',
+        desc: "Combines a supportive coil base with layers of foam on top, giving you the responsiveness of springs and the pressure relief of foam in one mattress. Available in Single, Double, Queen, and King." },
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('product') || products[0].slug;
+    const product = products.find(p => p.slug === slug) || products[0];
+
+    document.getElementById('crumbName').textContent = product.name;
+    document.getElementById('pdName').textContent = product.name;
+    document.getElementById('pdPrice').textContent = product.price;
+    document.getElementById('pdDescription').textContent = product.desc;
+    document.getElementById('mainImage').innerHTML = `<img class="product-photo" src="${product.img}" alt="${product.name}">`;
+
+    const thumbRow = document.getElementById('thumbRow');
+    for (let i = 0; i < 4; i++) {
+      const btn = document.createElement('button');
+      if (i === 0) btn.classList.add('active');
+      btn.innerHTML = `<img src="${product.img}" alt="${product.name}">`;
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.gallery-thumbs button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+      thumbRow.appendChild(btn);
+    }
+
+    const relatedGrid = document.getElementById('relatedGrid');
+    products.filter(p => p.slug !== product.slug).slice(0, 4).forEach(p => {
+      relatedGrid.innerHTML += `
+        <a class="related-card" href="product-detail.html?product=${p.slug}">
+          <div class="thumb"><img src="${p.img}" alt="${p.name}"></div>
+          <div class="info">
+            <h4>${p.name}</h4>
+            <div class="price">${p.price}</div>
+          </div>
+        </a>`;
+    });
+
+    document.querySelectorAll('.pill-row').forEach(group => {
+      group.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          group.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+    });
+
+    const qtyEl = document.querySelector('.qty-control span');
+    document.querySelector('.qty-minus').addEventListener('click', () => {
+      qtyEl.textContent = Math.max(1, parseInt(qtyEl.textContent) - 1);
+    });
+    document.querySelector('.qty-plus').addEventListener('click', () => {
+      qtyEl.textContent = parseInt(qtyEl.textContent) + 1;
+    });
+
+    document.querySelectorAll('.tab-headers button').forEach(tabBtn => {
+      tabBtn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-headers button').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        tabBtn.classList.add('active');
+        document.getElementById(tabBtn.dataset.tab).classList.add('active');
+      });
+    });
+
+    const sizeOptions = [
+      { label: 'Single', price: 15000 },
+      { label: 'Double', price: 20000 },
+      { label: 'Queen', price: 28000 },
+      { label: 'King', price: 35000 },
+    ];
+
+    function formatKSh(amount) {
+      return 'KSh ' + amount.toLocaleString('en-KE');
+    }
+
+    const sizeSelect = document.getElementById('sizeSelect');
+    const selectedPriceEl = document.getElementById('selectedPrice');
+    sizeOptions.forEach((opt, i) => {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = `${opt.label} — ${formatKSh(opt.price)}`;
+      sizeSelect.appendChild(option);
+    });
+
+    function updateSelectedPrice() {
+      const opt = sizeOptions[sizeSelect.value];
+      selectedPriceEl.textContent = `${opt.label}: ${formatKSh(opt.price)}`;
+    }
+    updateSelectedPrice();
+    sizeSelect.addEventListener('change', updateSelectedPrice);
+
+    const sizeDropdown = document.getElementById('sizeDropdown');
+
+    function currentItem() {
+      const opt = sizeOptions[sizeSelect.value];
+      return {
+        name: product.name,
+        size: opt.label,
+        price: opt.price,
+        qty: parseInt(qtyEl.textContent, 10)
+      };
+    }
+
+    document.getElementById('buyBtn').addEventListener('click', () => {
+      window.MPMCart.buyNow(currentItem());
+    });
+
+    document.getElementById('addCartBtn').addEventListener('click', () => {
+      window.MPMCart.addToCart(currentItem());
+    });
+  </script>
+  <script src="cart.js"></script>
+</body>
+</html>
